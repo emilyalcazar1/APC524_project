@@ -11,6 +11,8 @@ class IonImplant(inputgrid: SimulationGrid_3D, potential: Potential):
     #ten units of distance per time stamp
     random_kinetic = [random.randrange(-10,10),random.randrange(-10,10),random.randrange(-10,10)]
     
+    totalforce = random_kinetic
+    
     for j in range(len(inputgrid.points.keys())):
       #no repulsion from self
       if i == j:
@@ -24,9 +26,13 @@ class IonImplant(inputgrid: SimulationGrid_3D, potential: Potential):
         force_mag = int(potential.force(1,1,distance))
         
         #determines the force direction and magnitude in vector form
-        force_dir12 = np.array([point1[0]-point2[0],point1[1]-point2[1],point1[2]-point2[2]])/distance
-        force_dir12norm = np.round(force_dir12).astype(int)
-        force12 = force_mag * force_dir12norm
+        force_dir21 = np.array([point2[0]-point1[0],point2[1]-point1[1],point2[2]-point1[2]])/distance
+        force_dir21norm = np.round(force_dir12).astype(int)
+        force21 = force_mag * force_dir12norm
+        totalforce += force12;
+     
+    inputgrid.points(i) += totalforce
+        
         
         
       
