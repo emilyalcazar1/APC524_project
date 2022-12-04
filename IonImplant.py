@@ -2,6 +2,22 @@ import random
 import numpy as np
 
 class IonImplant(inputgrid: SimulationGrid_3D, potential: Potential):
+  """
+  This class is inherited from SimulationGrid_3D and Potential, and is used to simulate
+  the process of ion implantation. There are several significant simplifying assumptions 
+  as this whole implementation is created from scratch for this class. Firstly, all the 
+  atoms were deposited on some initial position as defined in the SimulationGrid_3D class
+  with the same kinetic energy. In addition, no additional atoms are introduced such that
+  this process effectively describes the thermalization process after implantation. Lastly,
+  the process of thermalization is dissipationless; that is, the random motion at each
+  time step is governed by the same random number generator.
+  
+  Arguments:
+  inputgrid: SimulationGrid_3D (class)
+  potential: Potential (class)
+  time: the number of time steps for the simulation.
+  
+  """
   time: int
   
 
