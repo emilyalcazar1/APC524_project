@@ -20,7 +20,10 @@ class IonImplant(inputgrid: SimulationGrid_3D, potential: Potential):
         point2 = inputgrid.points(j)
         distance = np.sqrt((point1[0]-point2[0])**2+(point1[1]-point2[1])**2+(point1[2]-point2[2])**2)
         
+        #find the force by calling the passed in potential
         force_mag = int(potential.force(1,1,distance))
+        
+        #determines the force direction and magnitude in vector form
         force_dir12 = np.array([point1[0]-point2[0],point1[1]-point2[1],point1[2]-point2[2]])/distance
         force_dir12norm = np.round(force_dir12).astype(int)
         force12 = force_mag * force_dir12norm
