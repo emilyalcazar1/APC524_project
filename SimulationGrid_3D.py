@@ -4,7 +4,6 @@ class SimulationGrid_3D:
     inside a 3D grid. It explicitly defines the size of the simulation box and the
     number of points in each grid. 
     
-
     
     Arguments:
     x, y, z: (int) grid size along each direction
@@ -42,4 +41,3 @@ class SimulationGrid_3D:
             
         if max(z_coords) > y_length or min(z_coords) > z_length or max(z_coords) < 0 or min(z_coords) < 0:
             raise TypeError("Points exist out of bounds of z")
-    
