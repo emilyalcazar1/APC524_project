@@ -18,11 +18,6 @@ class IonImplant:
     time: the number of time steps for the simulation.
 
     """
-    
-    #def __init__(self, inputgrid: SimulationGrid_3D, potential: Potential, time: int):
-    #    self.time = time;
-    #    self.inputgrid = inputgrid
-    #    self.potential = potential
         
     def run(inputgrid, potential, time):
     #Pseudo-random movement of points subject to some potential
