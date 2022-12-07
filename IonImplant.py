@@ -16,7 +16,6 @@ class IonImplant:
     inputgrid: SimulationGrid_3D (class)
     potential: Potential (class)
     time: the number of time steps for the simulation.
-    plot: (boolean) plots the history of the simulation.
 
     """
     
@@ -69,26 +68,41 @@ class IonImplant:
                     inputgrid.points[i][index] += totalforce[index]
                 
                 # this makes sure that the atom is confined within the grid walls
-                if inputgrid.points[i][0] >= inputgrid.x:
-                    residue_dist = inputgrid.points[i][0] - inputgrid.x
-                    inputgrid.points[i][0] = inputgrid.x - residue_dist
+                while inputgrid.points[i][0] >= inputgrid.x or inputgrid.points[i][0] < 0:
+                    
+                    if inputgrid.points[i][0] >= inputgrid.x:
+                        residue_dist = inputgrid.points[i][0] - inputgrid.x
+                        inputgrid.points[i][0] = inputgrid.x - residue_dist
+                    
+                    if inputgrid.points[i][0] < 0:
+                        inputgrid.points[i][0] = -1 * inputgrid.points[i][0]
+                    
+                    if inputgrid.points[i][0] <= inputgrid.x and inputgrid.points[i][0] >= 0:
+                        break
 
-                if inputgrid.points[i][1] >= inputgrid.y:
-                    residue_dist = inputgrid.points[i][1] - inputgrid.y
-                    inputgrid.points[i][1] = inputgrid.y - residue_dist
+                while inputgrid.points[i][1] >= inputgrid.y or inputgrid.points[i][1] < 0:
+                    
+                    if inputgrid.points[i][1] >= inputgrid.y:
+                        residue_dist = inputgrid.points[i][1] - inputgrid.y
+                        inputgrid.points[i][1] = inputgrid.y - residue_dist
+                    
+                    if inputgrid.points[i][1] < 0:
+                        inputgrid.points[i][1] = -1 * inputgrid.points[i][1]
+                        
+                    if inputgrid.points[i][1] <= inputgrid.y and inputgrid.points[i][1] >= 0:
+                        break
 
-                if inputgrid.points[i][2] >= inputgrid.z:
-                    residue_dist = inputgrid.points[i][2] - inputgrid.z
-                    inputgrid.points[i][2] = inputgrid.z - residue_dist
-
-                if inputgrid.points[i][0] < 0:
-                    inputgrid.points[i][0] = -1 * inputgrid.points[i][0]
-
-                if inputgrid.points[i][1] < 0:
-                    inputgrid.points[i][1] = -1 * inputgrid.points[i][1]
-
-                if inputgrid.points[i][2] < 0:
-                    inputgrid.points[i][2] = -1 * inputgrid.points[i][2]
+                while inputgrid.points[i][2] >= inputgrid.z or inputgrid.points[i][2] < 0:
+                    
+                    if inputgrid.points[i][2] >= inputgrid.z:
+                        residue_dist = inputgrid.points[i][2] - inputgrid.z
+                        inputgrid.points[i][2] = inputgrid.z - residue_dist
+                    
+                    if inputgrid.points[i][2] < 0:
+                        inputgrid.points[i][2] = -1 * inputgrid.points[i][2]
+                        
+                    if inputgrid.points[i][2] <= inputgrid.z and inputgrid.points[i][2] >= 0:
+                        break
                     
                 if plot == True:
                     xhist[i].append(inputgrid.points[i][0])
@@ -106,4 +120,7 @@ class IonImplant:
             ax.set_xlabel('x')
             ax.set_ylabel('y')
             ax.set_zlabel('z')
+            ax.set_xlim(0,inputgrid.x)
+            ax.set_ylim(0,inputgrid.y)
+            ax.set_zlim(0,inputgrid.z)
             plt.show()
