@@ -1,6 +1,3 @@
-import random
-import numpy as np
-
 class IonImplant:
     """
     This class takes in arguments of objects SimulationGrid_3D and Potential, and is used to simulate
@@ -18,6 +15,11 @@ class IonImplant:
     time: the number of time steps for the simulation.
 
     """
+    
+    #def __init__(self, inputgrid: SimulationGrid_3D, potential: Potential, time: int):
+    #    self.time = time;
+    #    self.inputgrid = inputgrid
+    #    self.potential = potential
         
     def run(inputgrid, potential, time):
     #Pseudo-random movement of points subject to some potential
@@ -36,9 +38,17 @@ class IonImplant:
                         point1 = inputgrid.points[i]
                         point2 = inputgrid.points[j]
                         distance = np.sqrt((point1[0]-point2[0])**2+(point1[1]-point2[1])**2+(point1[2]-point2[2])**2)
-
-                        #find the force by calling the passed in potential
-                        force_mag = int(potential.force(1,1,distance))
+                        
+                                
+                        # If two atoms are occupying the same position in the grid,
+                        # let dist = 0.1 to overcome the singularity.
+                        if distance == 0:
+                            distance = 0.1;
+                            
+                        # find the force by calling the passed in potential;
+                        # the charge is set to equal to 10
+                        force_mag = int(potential.force(10,10,distance))
+                        
 
                         #determines the force direction and magnitude in vector form
                         force_dir21 = np.array([point2[0]-point1[0],point2[1]-point1[1],point2[2]-point1[2]])/distance
@@ -70,3 +80,4 @@ class IonImplant:
 
                 if inputgrid.points[i][2] < 0:
                     inputgrid.points[i][2] = -1 * inputgrid.points[i][2]
+                
