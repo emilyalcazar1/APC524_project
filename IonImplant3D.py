@@ -1,6 +1,3 @@
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-
 class IonImplant3D:
     """
     This class takes in arguments of objects SimulationGrid_3D and Potential, and is used to simulate
@@ -20,9 +17,9 @@ class IonImplant3D:
     """
     
     def run(inputgrid: SimulationGrid_3D, potential: Potential, time: int, plot: bool):
-        
+
         # Type checking
-        if not issubclass(potential, Potential):
+        if not isinstance(potential, Potential):
             raise TypeError("The argument for potential is not Potential or an inherited class of Potential")
         
         if not isinstance(inputgrid, SimulationGrid_3D):
@@ -30,7 +27,7 @@ class IonImplant3D:
         
         if type(time) != int:
             raise TypeError("time must be of type int")
-            
+        
         #declare arrays to store location history if plot is called.
         xhist = {}
         yhist = {}
@@ -59,13 +56,13 @@ class IonImplant3D:
                         
                                 
                         # If two atoms are occupying the same position in the grid,
-                        # let dist = 0.1 to overcome the singularity.
+                        # let dist = 3 to overcome the singularity.
                         if distance == 0:
-                            distance = 5;
+                            distance = 3;
                             
                         # find the force by calling the passed in potential;
                         # the charge is set to equal to 10
-                        force_mag = int(potential.force(20,20,distance))
+                        force_mag = int(potential.force(distance))
                         
 
                         #determines the force direction and magnitude in vector form
@@ -123,7 +120,6 @@ class IonImplant3D:
         if plot == True:
             fig = plt.figure(figsize=(10,10))
             ax = fig.add_subplot(111, projection='3d')
-
             for i in inputgrid.points.keys():
                 ax.plot(xhist[i],yhist[i],zhist[i])
 
