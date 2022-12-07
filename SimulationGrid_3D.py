@@ -28,13 +28,6 @@ class SimulationGrid_3D:
         if not isinstance(points, dict):
             raise TypeError()
         
-        # Ensures that no points exist outside the grid size
-        set_coords = points.values()
-        
-        x_coords = [list(set_coords)[i][0] for i in range(len(points.keys()))]
-        y_coords = [list(set_coords)[i][1] for i in range(len(points.keys()))]
-        z_coords = [list(set_coords)[i][2] for i in range(len(points.keys()))]
-
         # Ensures that the dicts contains 3D coordinates.
         for i in self.points.keys():
             if type(self.points[i]) is not list:
@@ -42,6 +35,13 @@ class SimulationGrid_3D:
             
             if len(self.points[i]) != 3:
                 raise TypeError("The points are not indexed by lists of length 3")
+                
+        # Ensures that no points exist outside the grid size
+        set_coords = points.values()
+        
+        x_coords = [list(set_coords)[i][0] for i in range(len(points.keys()))]
+        y_coords = [list(set_coords)[i][1] for i in range(len(points.keys()))]
+        z_coords = [list(set_coords)[i][2] for i in range(len(points.keys()))]
         
         if max(x_coords) > x_length or min(x_coords) > x_length or max(x_coords) < 0 or min(x_coords) < 0:
             raise TypeError("Points exist out of bounds of x")
@@ -55,7 +55,7 @@ class SimulationGrid_3D:
                 
     
     def plot3D(self):
-        fig = plt.figure(figsize=(4,4))
+        fig = plt.figure(figsize=(10,10))
         ax = fig.add_subplot(111, projection='3d')
         x = []
         y = []
