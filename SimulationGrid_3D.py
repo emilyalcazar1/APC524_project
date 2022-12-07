@@ -1,3 +1,6 @@
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
 class SimulationGrid_3D:
     """
     This class acts as a parent class to all simulation work that involves points
@@ -32,6 +35,13 @@ class SimulationGrid_3D:
         y_coords = [list(set_coords)[i][1] for i in range(len(points.keys()))]
         z_coords = [list(set_coords)[i][2] for i in range(len(points.keys()))]
 
+        # Ensures that the dicts contains 3D coordinates.
+        for i in self.points.keys():
+            if type(self.points[i]) is not list:
+                raise TypeError("The points are not indexed by lists")
+            
+            if len(self.points[i]) != 3:
+                raise TypeError("The points are not indexed by lists of length 3")
         
         if max(x_coords) > x_length or min(x_coords) > x_length or max(x_coords) < 0 or min(x_coords) < 0:
             raise TypeError("Points exist out of bounds of x")
@@ -41,6 +51,8 @@ class SimulationGrid_3D:
             
         if max(z_coords) > y_length or min(z_coords) > z_length or max(z_coords) < 0 or min(z_coords) < 0:
             raise TypeError("Points exist out of bounds of z")
+            
+                
     
     def plot3D(self):
         fig = plt.figure(figsize=(4,4))
