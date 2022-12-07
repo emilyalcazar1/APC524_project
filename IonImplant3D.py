@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-class IonImplant:
+class IonImplant3D:
     """
     This class takes in arguments of objects SimulationGrid_3D and Potential, and is used to simulate
     the process of ion implantation. There are several significant simplifying assumptions 
@@ -20,7 +20,17 @@ class IonImplant:
     """
     
     def run(inputgrid: SimulationGrid_3D, potential: Potential, time: int, plot: bool):
-
+        
+        # Type checking
+        if not issubclass(potential, Potential):
+            raise TypeError("The argument for potential is not Potential or an inherited class of Potential")
+        
+        if not isinstance(inputgrid, SimulationGrid_3D):
+            raise TypeError("The object passed for inputgrid is not of type SimulationGrid_3D")
+        
+        if type(time) != int:
+            raise TypeError("time must be of type int")
+            
         #declare arrays to store location history if plot is called.
         xhist = {}
         yhist = {}
