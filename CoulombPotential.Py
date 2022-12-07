@@ -1,8 +1,10 @@
-class CoulombPotential(Potential):
-  q1: int
-  q2: int
-  r: int
+class Potential:
+    ...
     
-  def force(q1, q2, r):
-    return (q1*q2)/r**2
-  
+class CoulombPotential(Potential):
+    q1: int
+    q2: int
+    r: int
+
+    def force(q1, q2, r):
+        return (q1*q2)/r**2
