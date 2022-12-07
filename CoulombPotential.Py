@@ -2,9 +2,9 @@ class Potential:
     ...
     
 class CoulombPotential(Potential):
-    q1: int
-    q2: int
-    r: int
+    def __init__(self, q1, q2):
+        self.q1 = q1
+        self.q2 = q2
 
-    def force(q1, q2, r):
-        return (q1*q2)/r**2
+    def force(self, r):
+        return (self.q1*self.q2)/r**2
