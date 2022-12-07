@@ -27,6 +27,24 @@ def Failing_OutOfBoundsAbove():
   except:
     assert True
 
+# This test should fail as the coordinates are not lists
+def Failing_IncorrectDictInput():
+  try:
+    points = {'a':'1,2,3','b':(2,3,4)}
+    SimulationGrid_3D(3,3,3,points)
+    assert False
+  except TypeError:
+    assert True
+    
+# This test should fail as the coordinates are not 3D
+def Failing_IncorrectDictInputDim():
+  try:
+    points = {'a':[1,2],'b':[1,2,3,4]}
+    SimulationGrid_3D(3,3,3,points)
+    assert False
+  except TypeError:
+    assert True
+
 # This test should fail as a is out of bounds below in z
 def Failing_OutOfBoundsBelow():
   try:
