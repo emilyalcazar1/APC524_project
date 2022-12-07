@@ -41,3 +41,24 @@ class SimulationGrid_3D:
             
         if max(z_coords) > y_length or min(z_coords) > z_length or max(z_coords) < 0 or min(z_coords) < 0:
             raise TypeError("Points exist out of bounds of z")
+    
+    def plot3D(self):
+        fig = plt.figure(figsize=(4,4))
+        ax = fig.add_subplot(111, projection='3d')
+        x = []
+        y = []
+        z = []
+        
+        for i in self.points.keys():
+            x.append(self.points[i][0])
+            y.append(self.points[i][1])
+            z.append(self.points[i][2])
+        
+        ax.scatter(x,y,z)
+        ax.set_xlabel('x')
+        ax.set_ylabel('y')
+        ax.set_zlabel('z')
+        ax.set_xlim(0,self.x)
+        ax.set_ylim(0,self.y)
+        ax.set_zlim(0,self.z)
+        plt.show()
