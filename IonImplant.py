@@ -1,3 +1,6 @@
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
 class IonImplant:
     """
     This class takes in arguments of objects SimulationGrid_3D and Potential, and is used to simulate
@@ -13,15 +16,21 @@ class IonImplant:
     inputgrid: SimulationGrid_3D (class)
     potential: Potential (class)
     time: the number of time steps for the simulation.
+    plot: (boolean) plots the history of the simulation.
 
     """
     
-    #def __init__(self, inputgrid: SimulationGrid_3D, potential: Potential, time: int):
-    #    self.time = time;
-    #    self.inputgrid = inputgrid
-    #    self.potential = potential
-        
-    def run(inputgrid, potential, time):
+    def run(inputgrid: SimulationGrid_3D, potential: Potential, time: int, plot: bool):
+
+        #declare arrays to store location history if plot is called.
+        xhist = {}
+        yhist = {}
+        zhist = {}
+        for i in inputgrid.points.keys():
+            xhist[i] = [inputgrid.points[i][0]]
+            yhist[i] = [inputgrid.points[i][1]]
+            zhist[i] = [inputgrid.points[i][2]]
+    
     #Pseudo-random movement of points subject to some potential
         for t in range(time):
             for i in inputgrid.points.keys():
@@ -43,11 +52,11 @@ class IonImplant:
                         # If two atoms are occupying the same position in the grid,
                         # let dist = 0.1 to overcome the singularity.
                         if distance == 0:
-                            distance = 0.1;
+                            distance = 5;
                             
                         # find the force by calling the passed in potential;
                         # the charge is set to equal to 10
-                        force_mag = int(potential.force(10,10,distance))
+                        force_mag = int(potential.force(20,20,distance))
                         
 
                         #determines the force direction and magnitude in vector form
@@ -80,4 +89,21 @@ class IonImplant:
 
                 if inputgrid.points[i][2] < 0:
                     inputgrid.points[i][2] = -1 * inputgrid.points[i][2]
-                
+                    
+                if plot == True:
+                    xhist[i].append(inputgrid.points[i][0])
+                    yhist[i].append(inputgrid.points[i][1])
+                    zhist[i].append(inputgrid.points[i][2])
+
+                    
+        if plot == True:
+            fig = plt.figure(figsize=(10,10))
+            ax = fig.add_subplot(111, projection='3d')
+
+            for i in inputgrid.points.keys():
+                ax.plot(xhist[i],yhist[i],zhist[i])
+
+            ax.set_xlabel('x')
+            ax.set_ylabel('y')
+            ax.set_zlabel('z')
+            plt.show()
