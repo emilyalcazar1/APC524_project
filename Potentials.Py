@@ -1,5 +1,11 @@
+import abc
+import dataclasses
+
+@dataclasses.dataclass
 class Potential:
-    ...
+    @abc.abstractmethod
+    def force(self, r):
+        pass
     
 class CoulombPotential(Potential):
     def __init__(self, q1, q2):
