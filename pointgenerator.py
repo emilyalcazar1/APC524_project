@@ -1,4 +1,4 @@
-def pointgenerator(npoints: int, init_condition, xlim = 100, ylim = 100, zlim = 100):
+def point_generator(npoints: int, init_condition, xlim = 100, ylim = 100, zlim = 100):
     """
     This function generates the dictionary contaning the points and its associated coordinates
     can be passed on to the class SimulationGrid_3D, among others. Each of the npoints can either 
