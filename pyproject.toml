@@ -1,7 +1,6 @@
 [project]
-name = "unc"
+name = "final project"
 version = "0.1.0"
-description = "CI and Packaging Submission for JL"
 requires-python = ">=3.7"
 
 [build-system]
