@@ -14,9 +14,7 @@ def PointGenerator(npoints: int, init_condition, xlim = 100, ylim = 100, zlim = 
     err_flag = 0;
     valid_param = ["random", "line","square"]
     grid = {}
-    
-    print(init_condition)
-    
+        
     # checks that the argument passed into init_condition are valid
     if not isinstance(init_condition,list):
         err_flag = 1
