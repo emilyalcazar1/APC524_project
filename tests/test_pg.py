@@ -2,6 +2,9 @@ import PointGenerator
 
 def PassingTest_List():
     assert PointGenerator(2,[[0,0,0],[1,1,1]]) == {'0':[0,0,0],'1':[1,1,1]}
+    
+def PassingTest_ListSquare():
+    assert PointGenerator(2,[[0,0,0],[0,1,0],[1,0,0],[1,1,0]]) == PointGenerator(4,'square')
 
 def PassingTest_Line():
     assert PointGenerator(2,'line') == {'0':[0,0,0],'1':[0,0,1]}
