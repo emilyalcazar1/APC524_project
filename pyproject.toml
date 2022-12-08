@@ -1,0 +1,14 @@
+[project]
+name = "unc"
+version = "0.1.0"
+description = "CI and Packaging Submission for JL"
+requires-python = ">=3.7"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.optional-dependencies]
+test = [
+  "pytest"
+  ]
