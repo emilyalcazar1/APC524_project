@@ -1,4 +1,4 @@
-from ... import SimulationGrid_3D
+from APC524_project import SimulationGrid_3D
 
 def PassingTest():
     try:
