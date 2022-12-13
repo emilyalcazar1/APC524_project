@@ -1,6 +1,3 @@
-import SimulationGrid_3D
-
-
 def PassingTest():
     try:
         points = {'a':[1,1,1],'b':[2,2,2]}
