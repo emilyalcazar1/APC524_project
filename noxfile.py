@@ -3,4 +3,4 @@ import nox
 @nox.session
 def tests(session: nox.Session) -> None:
     session.install(".[test]")
-    session.run('pytest', *session.posargs)
+    session.run('pytest', ['tests/test_3Dgrid.py','tests/test_pg.py'])
