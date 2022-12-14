@@ -1,5 +1,4 @@
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+import matplotlib as plt
 
 class SimulationGrid_3D:
     """
