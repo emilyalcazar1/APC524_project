@@ -27,6 +27,10 @@ Outputs:
         average height of the system at each timestep
 """
 
+import matplotlib as mpl
+import numpy as np
+import random as rm
+
 def CVDsim(nsites = None,timesteps = None,hmax = None): 
     
     """
