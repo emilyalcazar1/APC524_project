@@ -31,3 +31,6 @@ jobs:
       
     - name: run nox
       run: nox -s tests
+      
+    - name: run pytest
+      run: python -m pytest
