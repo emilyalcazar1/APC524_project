@@ -3,4 +3,4 @@ sys.path.insert(1, 'Random_num_gen_1D.py')
 from Random_num_gen_1D import random_num_generator
 
 def test_upper_bound():
-    assert max(random_num_generator(0.0,10.0,10) < 10.0
+    assert max(random_num_generator(0.0,10.0,10)) < 10.0
