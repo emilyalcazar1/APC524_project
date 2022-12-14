@@ -1,4 +1,4 @@
-from . import SimulationGrid_3D
+import src/SimulationGrid_3D
 
 def PassingTest():
     try:
