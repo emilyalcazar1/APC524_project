@@ -25,5 +25,5 @@ def test_FailingTest_UndefInit():
     try:
         point_generator(2,'undef')
         assert False
-    except SyntaxError:
+    except TypeError:
         assert True
