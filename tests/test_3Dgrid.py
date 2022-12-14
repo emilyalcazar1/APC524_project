@@ -1,4 +1,4 @@
-import SimulationGrid_3D
+from simcode import SimulationGrid_3D
 
 def PassingTest():
     try:
