@@ -10,6 +10,5 @@ build-backend = "hatchling.build"
 [project.optional-dependencies]
 test = [
   "pytest",
-  "matplotlib",
-  "mpl_toolkits"
+  "matplotlib"
   ]
