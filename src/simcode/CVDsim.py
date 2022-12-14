@@ -1,37 +1,41 @@
-# Monte Carlo Simulation of Material Growth through Chemical Vapor Deposition
+"""
+Monte Carlo Simulation of Material Growth through Chemical Vapor Deposition
 
-# Based on J. Emery's adaptation of A Kinetic Monte Carlo method for the
-# atomic-scale simulation of chemical vapor deposition: Application to diamond.
-# Journal of Applied Physics, 82(12), 6293–6300. https://doi.org/10.1063/1.366532
+Based on J. Emery's adaptation of A Kinetic Monte Carlo method for the
+atomic-scale simulation of chemical vapor deposition: Application to diamond.
+Journal of Applied Physics, 82(12), 6293–6300. https://doi.org/10.1063/1.366532
 
-# Call CVDsim(nsites, timesteps, hmax) to run
+Call CVDsim(nsites, timesteps, hmax) to run
 
-# Inputs:
-#   nsites: Number of sites on the substrate surface where growth can occur
-#   timesteps: Number of time steps for the reaction to occur
-#   hmax: Maximum height material growth can reach (simulation will terminate)
-#   reac: An array of the activity for each chemical species (Defined
-#         inside the function)
+Inputs:
+  nsites: Number of sites on the substrate surface where growth can occur
+  timesteps: Number of time steps for the reaction to occur
+  hmax: Maximum height material growth can reach (simulation will terminate)
+  reac: An array of the activity for each chemical species (Defined
+         inside the function)
 
-# Outputs:
-#   tot: An array of size [nsites x hmax] of the most recent timestep
-#   tottime: An array of size [(nsites x hmax) x (timesteps + 1)] that compiles 
-#            the tot matrix for each timestep
-#   height: Array of material height at each site
-#   species: Array of chemical species at each site
-#   time: An arry of size [(timesteps + 1) x 1] of the time
-#   totact: An array of size [(timesteps + 1) x 1] that compiles the overall
-#           surface activity over time
-#   aveh: An array of size [(timesteps + 1) x 1] that gives the 
-#         average height of the system at each timestep
+Outputs:
+  tot: An array of size [nsites x hmax] of the most recent timestep
+  tottime: An array of size [(nsites x hmax) x (timesteps + 1)] that compiles 
+            the tot matrix for each timestep
+  height: Array of material height at each site
+  species: Array of chemical species at each site
+  time: An arry of size [(timesteps + 1) x 1] of the time
+  totact: An array of size [(timesteps + 1) x 1] that compiles the overall
+           surface activity over time
+  aveh: An array of size [(timesteps + 1) x 1] that gives the 
+        average height of the system at each timestep
+"""
 
 def CVDsim(nsites = None,timesteps = None,hmax = None): 
     
-    # This function simulates the chemical vapor deposition, a method of material
-    # growth, to better understand the underlying kinetics of the process. The
-    # material growth is regulated by the characteristic reaction rates of specific
-    # chemical reactions. For this reason, this code (the reaction rates) may be
-    # adapted to simulate the material growth of different materials.
+    """
+     This function simulates the chemical vapor deposition, a method of material
+     growth, to better understand the underlying kinetics of the process. The
+     material growth is regulated by the characteristic reaction rates of specific
+     chemical reactions. For this reason, this code (the reaction rates) may be
+     adapted to simulate the material growth of different materials.
+    """
     
     # Define the reaction rates for the chemical reaction (material growth)
     r1 = 0;     # Rate of reaction 1 (forward direction)
