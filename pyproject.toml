@@ -11,5 +11,4 @@ build-backend = "hatchling.build"
 test = [
   "pytest",
   "matplotlib",
-  "matplotlib.pyplot"
   ]
