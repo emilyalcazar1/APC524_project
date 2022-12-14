@@ -1,4 +1,6 @@
-import point_generator
+import sys
+sys.path.insert(1, 'src/simcode')
+from point_generator import point_generator
 
 def PassingTest_List():
     assert point_generator(2,[[0,0,0],[1,1,1]]) == {'0':[0,0,0],'1':[1,1,1]}
