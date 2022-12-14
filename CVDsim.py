@@ -1,7 +1,8 @@
 # Monte Carlo Simulation of Material Growth through Chemical Vapor Deposition
 
-# Based on J. Emery's adaptation of C. Battaille and D. J. Srolovitz,
-# Annual Reviews of Materials Research, 32,  2002.
+# Based on J. Emery's adaptation of A Kinetic Monte Carlo method for the
+# atomic-scale simulation of chemical vapor deposition: Application to diamond.
+# Journal of Applied Physics, 82(12), 6293–6300. https://doi.org/10.1063/1.366532
 
 # Call CVDsim(nsites, timesteps, hmax) to run
 
@@ -53,113 +54,129 @@ def CVDsim(nsites = None,timesteps = None,hmax = None):
     
     # Create empty matrices for additional necessary values
     act = np.zeros((nsites,1))
-
+    
+    # Create the initial state of the system
     for i in np.arange(0,nsites):
         
+        # This for loop sets the first layer of the model as species A
+        # and the second layer of the model as species B
+        
         tot[i,0] = 1
-        
         tot[i,1] = 2
-        
         height[i] = 2
-        
         species[i] = 2
     
-    tottime.append(np.ndarray.tolist(tot))
+    tottime.append(np.ndarray.tolist(tot))      # Set the first total time array value
+    
+    aveh[0] = 2     # Set average height to 2 as the first two layers are occupied
+    time[0] = 0     # Set the first value of the time array to zero
+    tm = 0          # Set the total time equal to zero
 
-    aveh[0] = 2
-
-    time[0] = 0
-
-    tm = 0
-
+    # Main body of the simulation that returns the final output matrices.
     for timestep in np.arange(0,timesteps):
         
+        # Loops through each timestep
+        
         for i in np.arange(0,nsites):
+            
+            # Calculates the activity at each site in the simulation.
+            
+            k = height[i]       # Edits row i of the height array
+            s = species[i]      # Edits row i of the species array     
+            act[i] = reac[int(s[0])-1]  # Finds the activity of species s in row i
 
-            k = height[i]
+        # Determine the total activity and activity per site
+        at = sum(act)           # Total activity is the sum of all surface species
+        avea = act / at         # Average activity at each surface site
+        ss = np.cumsum(avea)    # Cumulative sum of the fractional activities
+        totact[0] = at          # Set the initial value of totact as sum of activities
 
-            s = species[i]            
-
-            act[i] = reac[int(s[0])-1]
-
-        at = sum(act)
-
-        acta = act / at
-
-        ss = np.cumsum(acta)
-
-        totact[0] = at
-
-        k = 0
-
-        rand1 = rm.randint(0,1)
-
+        # Pick the site at which a reaction will occur based on a randomly generated number
+        # number (Monte-Carlo!) and the activity number line
+        
+        k = 0       # Reset k following each loop
+        rand1 = rm.randint(0,1)     # Select a random value between 0 and 1 (Monte-Carlo!)
+        
         for j in np.arange(0,nsites-1):
 
+            # Splits the system into j intervals
+            
             if rand1 > ss[j]:
-
+                
+                # Returns an increased value of k if the cumulative sum of fractional
+                # activities is less than the randomly generated number
+                
                 k = k + 1
-
+        
+        # Calculate the species and height at the selected site
         t = species[k-1]
-
         h = height[k-1]
-
+        
+        # Use randomly generated number to select the reaction, species, and height
         if t == 2:
 
+            # If the second species (B(s)) is picked, the reaction k^-1 will proceed, 
+            # changing B(s) into *(s).
+            
             tot[k-1][int(h[0])] = 4
-
             species[k-1] = 4
 
         else:
 
             if t == 3:
-
+                
+                # If the third species (AB2(s)) is picked, either reaction k^-2 or
+                # k^3 will proceed, depending on the reaction rate.
+                
                 if rm.randint(0,1) < r3 / (r3 + rv2):
-
+                    
+                    # Procedure if reaction k^-2 proceeds
+                    
                     tot[k][int(h[0])] = 1
-
                     tot[k][int(h[0])+1] = 2
-
                     species[k] = 2
-
                     height[k] = h + 1
 
                 else:
 
+                    # Procedure if reaction k^3 proceeds
+                    
                     tot[k][int(h[0])] = 4
-
                     species[k] = 4
 
             else:
 
                 if t == 4:
-
+                    
+                    # If the fourth species (*(s)) is picked, either reaction k^1 or
+                    # k^2 will proceed.
+                    
                     if rm.randint(0,1) < r1 / (r1 + r2):
-
+                        
+                        # Procedure if reaction k^1 proceeds
+                        
                         tot[k][int(h[0])] = 2
-
                         species[k] = 2
 
                     else:
 
+                        # Procedure if reaction k^2 proceeds
+                        
                         tot[k][int(h[0])] = 3
-
                         species[k] = 3
 
+            # Calculate the change in time and the total time
             rand1 = rm.randint(0,1)
-
-            dt = - np.log(rand1 + 0.01) / (at + 0.01)
-
-            tm = tm + dt
-
-            time[timestep] = tm
-
-            sh = sum(height)
-
-            aveh[timestep] = sh / nsites
-
-            totact[timestep] = sum(act)
-
-            tottime.append(np.ndarray.tolist(tot))
+            
+            # Set the timestep based on a randomly generated number and total activity
+            dt = - np.log(rand1 + 0.01) / (at + 0.01) 
+            tm = tm + dt    # Gives the next timestep
+            time[timestep] = tm     # Change the time array
+            toth = sum(height)      # Calculate the total height
+            
+            # Prepare outputs
+            aveh[timestep] = toth / nsites  # Calculate the average height at each timestep
+            totact[timestep] = sum(act)     # Calculate the total activity at each timestep
+            tottime.append(np.ndarray.tolist(tot))  # Compile the data into tottime
 
     return tot,tottime,height,species,time,aveh,totact
