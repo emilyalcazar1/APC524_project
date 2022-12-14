@@ -1,6 +1,8 @@
-import SimulationGrid_3D
+import sys
+sys.path.insert(1, 'src/simcode')
+from SimulationGrid_3D import SimulationGrid_3D
 
-def PassingTest():
+def test_PassingTest():
     try:
         points = {'a':[1,1,1],'b':[2,2,2]}
         SimulationGrid_3D(3,3,3,points)
@@ -9,7 +11,7 @@ def PassingTest():
         assert False
     
 # This test should fail since the input type for the points is not a dict
-def Failing_IncorrectPoints1():
+def test_Failing_IncorrectPoints1():
     try:
         points = [[0,0,0],[1,1,1]]
         SimulationGrid_3D(3,3,3,points)
@@ -18,7 +20,7 @@ def Failing_IncorrectPoints1():
         assert True
     
 # This test should fail as a is out of bounds above in z
-def Failing_OutOfBoundsAbove():
+def test_Failing_OutOfBoundsAbove():
     try:
         points = {'a':[1,1,4],'b':[2,2,2]}
         SimulationGrid_3D(3,3,3,points)
@@ -27,7 +29,7 @@ def Failing_OutOfBoundsAbove():
         assert True
 
 # This test should fail as the coordinates are not lists
-def Failing_IncorrectDictInput():
+def test_Failing_IncorrectDictInput():
     try:
         points = {'a':'1,2,3','b':(2,3,4)}
         SimulationGrid_3D(3,3,3,points)
@@ -36,7 +38,7 @@ def Failing_IncorrectDictInput():
         assert True
     
 # This test should fail as the coordinates are not 3D
-def Failing_IncorrectDictInputDim():
+def test_Failing_IncorrectDictInputDim():
     try:
         points = {'a':[1,2],'b':[1,2,3,4]}
         SimulationGrid_3D(3,3,3,points)
@@ -45,7 +47,7 @@ def Failing_IncorrectDictInputDim():
         assert True
 
 # This test should fail as a is out of bounds below in z
-def Failing_OutOfBoundsBelow():
+def test_Failing_OutOfBoundsBelow():
     try:
         points = {'a':[1,1,-1],'b':[2,2,2]}
         SimulationGrid_3D(3,3,3,points)
