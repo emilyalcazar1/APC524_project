@@ -1,4 +1,6 @@
-from ..simcode import SimulationGrid_3D
+import sys
+sys.path.insert(1, 'src/simcode')
+from SimulationGrid_3D import SimulationGrid_3D
 
 def PassingTest():
     try:
