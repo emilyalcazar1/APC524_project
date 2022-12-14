@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(1, 'Random_num_gen_1D.py')
+sys.path.insert(1, 'src/simcode')
 from Random_num_gen_1D import random_num_generator
 
 def test_upper_bound():
