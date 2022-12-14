@@ -1,4 +1,4 @@
-# APC524_project
+# APC524 Project
 
 The repository containing Monte-Carlo Simulation code implemented for APC524.
 
