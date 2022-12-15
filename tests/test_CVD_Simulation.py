@@ -41,7 +41,15 @@ def test_Failing_NoSites():
 # This test should fail because the max height is set to zero
 def test_Failing_NoHeight():
     try:
-        CVD_Simulation(3,10,0)
+        CVD_Simulation(5,10,0)
+        assert False
+    except IndexError:
+        assert True
+
+# This test should fail because the timestep is set to zero
+def test_Failing_NoTime():
+    try:
+        CVD_Simulation(5,0,10)
         assert False
     except IndexError:
         assert True
