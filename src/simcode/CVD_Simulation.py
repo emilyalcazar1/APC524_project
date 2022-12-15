@@ -104,9 +104,9 @@ def CVD_Simulation(nsites = None,timesteps = None,hmax = None):
         
         l = 0       # Reset l following each loop
         
-        rand1 = rm.randint(0,1)     # Select a random value between 0 and 1 (Monte-Carlo!)
+        rand1 = rm.uniform(0,1)     # Select a random value between 0 and 1 (Monte-Carlo!)
         
-        for j in range(len(np.arange(0,nsites))):
+        for j in range(len(np.arange(0,nsites-1))):
 
             # Splits the system into j intervals
             
@@ -118,8 +118,8 @@ def CVD_Simulation(nsites = None,timesteps = None,hmax = None):
                 l = l + 1
         
         # Calculate the species and height at the selected site
-        t = species[l-1]
-        h = height[l-1]
+        t = species[l]
+        h = height[l]
         
         # Use randomly generated number to select the reaction, species, and height
         if t == 2:
@@ -127,22 +127,22 @@ def CVD_Simulation(nsites = None,timesteps = None,hmax = None):
             # If the second species (B(s)) is picked, the reaction k^-1 will proceed, 
             # changing B(s) into *(s).
             
-            tot[l-1][int(h[0])-1] = 4
-            species[l-1] = 4
+            tot[l][int(h[0])-1] = 4
+            species[l] = 4
 
         elif t == 3:
                 
                 # If the third species (AB2(s)) is picked, either reaction k^-2 or
                 # k^3 will proceed, depending on the reaction rate.
                 
-            if rm.randint(0,1) < (r3 / (r3 + rv2)):
+            if rm.uniform(0,1) < (r3 / (r3 + rv2)):
                     
                 # Procedure if reaction k^-2 proceeds
                     
-                tot[l-1][int(h[0])-1] = 1
-                tot[l-1][int(h[0])] = 2
-                species[l-1] = 2
-                height[l-1] = h + 1
+                tot[l][int(h[0])-1] = 1
+                tot[l][int(h[0])] = 2
+                species[l] = 2
+                height[l] = h + 1
 
             else:
 
@@ -156,22 +156,22 @@ def CVD_Simulation(nsites = None,timesteps = None,hmax = None):
             # If the fourth species (*(s)) is picked, either reaction k^1 or
             # k^2 will proceed.
                     
-            if rm.randint(0,1) < (r1 / (r1 + r2)):
+            if rm.uniform(0,1) < (r1 / (r1 + r2)):
                         
                 # Procedure if reaction k^1 proceeds
                         
-                tot[l-1][int(h[0])] = 2
-                species[l-1] = 2
+                tot[l][int(h[0])-1] = 2
+                species[l] = 2
 
             else:
 
                 # Procedure if reaction k^2 proceeds
                         
-                tot[l-1][int(h[0])] = 3
-                species[l-1] = 3
+                tot[l][int(h[0])-1] = 3
+                species[l] = 3
 
         # Calculate the change in time and the total time
-        rand1 = rm.randint(0,1)
+        rand1 = rm.uniform(0,1)
             
         # Set the timestep based on a randomly generated number and total activity
         dt = - np.log(rand1 + 0.0001) / (at + 0.0001) 
