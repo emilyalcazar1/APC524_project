@@ -9,7 +9,7 @@ def test_upper_bound():
     except:
         assert False
         
- def test_lower_bound():
+def test_lower_bound():
     try:
         min(random_num_gen_1D(0.0,10.0,10)) > 1.0
         assert True
