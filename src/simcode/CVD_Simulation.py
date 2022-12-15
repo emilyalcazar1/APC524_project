@@ -1,11 +1,11 @@
 """
 Monte Carlo Simulation of Material Growth through Chemical Vapor Deposition
 
-Based on J. Emery's adaptation of A Kinetic Monte Carlo method for the
+Based on J. Emery's MATLAB adaptation of A Kinetic Monte Carlo method for the
 atomic-scale simulation of chemical vapor deposition: Application to diamond.
 Journal of Applied Physics, 82(12), 6293–6300. https://doi.org/10.1063/1.366532
 
-Call CVDsim(nsites, timesteps, hmax) to run
+Call CVD_Simulation(nsites, timesteps, hmax) to run
 
 Inputs:
   nsites: Number of sites on the substrate surface where growth can occur
