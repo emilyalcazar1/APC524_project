@@ -31,10 +31,7 @@ import matplotlib as mpl
 import numpy as np
 import random as rm
 
-import numpy as np
-import random as rm
-
-def CVDsim3(nsites = None,timesteps = None,hmax = None): 
+def CVD_Simulation(nsites = None,timesteps = None,hmax = None): 
     
     """
      This function simulates the chemical vapor deposition, a method of material
