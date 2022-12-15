@@ -35,7 +35,7 @@ def test_Failing_NoSites():
     try:
         CVD_Simulation(0,10,10)
         assert False
-    except TypeError:
+    except IndexError:
         assert True
 
 # This test should fail because the max height is set to zero
@@ -43,5 +43,5 @@ def test_Failing_NoHeight():
     try:
         CVD_Simulation(3,10,0)
         assert False
-    except TypeError:
+    except IndexError:
         assert True
