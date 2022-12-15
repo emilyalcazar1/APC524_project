@@ -7,5 +7,5 @@ def test_upper_bound():
         max(random_num_generator(0.0,10.0,10)) < 10.0
         assert True
     except:
-        assert false
+        assert False
         
