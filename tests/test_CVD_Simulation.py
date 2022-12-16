@@ -51,5 +51,5 @@ def test_Failing_NoTime():
     try:
         CVD_Simulation(5,0,10)
         assert False
-    except AssertionError:
+    except UnboundLocalError:
         assert True
