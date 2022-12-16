@@ -20,9 +20,27 @@ def test_Failing_IncorrectPoints1():
         assert True
     
 # This test should fail as a is out of bounds above in z
-def test_Failing_OutOfBoundsAbove():
+def test_Failing_OutOfBoundsAbove_z():
     try:
         points = {'a':[1,1,4],'b':[2,2,2]}
+        SimulationGrid_3D(3,3,3,points)
+        assert False
+    except:
+        assert True
+        
+# This test should fail as a is out of bounds above in y
+def test_Failing_OutOfBoundsAbove_y():
+    try:
+        points = {'a':[1,4,1],'b':[2,2,2]}
+        SimulationGrid_3D(3,3,3,points)
+        assert False
+    except:
+        assert True
+        
+# This test should fail as a is out of bounds above in x
+def test_Failing_OutOfBoundsAbove_x():
+    try:
+        points = {'a':[4,1,1],'b':[2,2,2]}
         SimulationGrid_3D(3,3,3,points)
         assert False
     except:
@@ -47,9 +65,27 @@ def test_Failing_IncorrectDictInputDim():
         assert True
 
 # This test should fail as a is out of bounds below in z
-def test_Failing_OutOfBoundsBelow():
+def test_Failing_OutOfBoundsBelow_z():
     try:
         points = {'a':[1,1,-1],'b':[2,2,2]}
+        SimulationGrid_3D(3,3,3,points)
+        assert False
+    except:
+        assert True
+        
+# This test should fail as a is out of bounds below in y
+def test_Failing_OutOfBoundsBelow_y():
+    try:
+        points = {'a':[1,-1,1],'b':[2,2,2]}
+        SimulationGrid_3D(3,3,3,points)
+        assert False
+    except:
+        assert True
+        
+# This test should fail as a is out of bounds below in x
+def test_Failing_OutOfBoundsBelow_x():
+    try:
+        points = {'a':[-1,1,1],'b':[2,2,2]}
         SimulationGrid_3D(3,3,3,points)
         assert False
     except:
