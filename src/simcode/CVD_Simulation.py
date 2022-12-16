@@ -41,11 +41,11 @@ def CVD_Simulation(nsites = None,timesteps = None,hmax = None):
     """
     
     # Define the reaction rates for the chemical reaction (material growth)
-    r1 = 0;     # Rate of reaction 1 (forward direction)
-    rv1 = 500;  # Rate of reaction 1 (reverse direction)
-    r2 = 500;   # Rate of reaction 2 (forward direction)
-    rv2 = 0;    # Rate of reaction 2 (reverse direction)
-    r3 = 500;   # Rate of reaction 3 (forward direction)
+    r1 = 100;     # Rate of reaction 1 (forward direction)
+    rv1 = 200;  # Rate of reaction 1 (reverse direction)
+    r2 = 100;   # Rate of reaction 2 (forward direction)
+    rv2 = 400;    # Rate of reaction 2 (reverse direction)
+    r3 = 400;   # Rate of reaction 3 (forward direction)
     
     # Create matrix of the chemical species: [A(s), B(s), AB2(s), *(s)]
     reac = np.array([0,rv1,(rv2 + r3),(r1 + r2)])
