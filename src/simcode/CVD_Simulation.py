@@ -27,7 +27,6 @@ Outputs:
         average height of the system at each timestep
 """
 
-import matplotlib as mpl
 import numpy as np
 import random as rm
 
@@ -184,4 +183,15 @@ def CVD_Simulation(nsites = None,timesteps = None,hmax = None):
         totact[timestep] = sum(act)     # Calculate the total activity at each timestep
         tottime.append(np.ndarray.tolist(tot))  # Compile the data into tottime
 
-    return tot,tottime,height,species,time,aveh,totact
+        # Collect all the data
+        data = []
+        
+        data.append(tot)
+        data.append(tottime)
+        data.append(height)
+        data.append(species)
+        data.append(time)
+        data.append(aveh)
+        data.append(totact)
+        
+    return data
